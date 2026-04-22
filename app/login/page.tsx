@@ -112,28 +112,10 @@ export default function LoginPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-col gap-2 mb-4">
-            <Button
-              type="button"
-              variant="outline"
-              className="w-full flex items-center justify-center gap-2"
-              onClick={() => handleOAuthSignIn('google')}
-              disabled={loading}
-            >
-              <Image src="/google.svg" alt="Google" width={20} height={20} />
-              Sign in with Google
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              className="w-full flex items-center justify-center gap-2"
-              onClick={() => handleOAuthSignIn('github')}
-              disabled={loading}
-            >
-              <Image src="/github.svg" alt="GitHub" width={20} height={20} className="dark: invert"/>
-              Sign in with GitHub
-            </Button>
-          </div>
+          {/* vortex-kanba fork: OAuth buttons hidden — Google/GitHub providers
+              are not configured on this Supabase project. Email/password is
+              the only supported path. Re-enable this block after registering
+              OAuth apps and enabling the providers in Supabase → Auth. */}
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
