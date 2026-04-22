@@ -92,6 +92,13 @@ DROP POLICY IF EXISTS "Users can delete their own comments" ON task_comments;
 DROP POLICY IF EXISTS "Users can view activity in accessible projects" ON activity_logs;
 DROP POLICY IF EXISTS "Users can create activity in accessible projects" ON activity_logs;
 
+-- vortex-kanba fork: also drop the new policy names in case earlier migrations
+-- created them under these exact names. Prevents "policy already exists" on fresh DB.
+DROP POLICY IF EXISTS "Users can update accessible projects" ON projects;
+DROP POLICY IF EXISTS "Users can view project members" ON project_members;
+DROP POLICY IF EXISTS "Users can update own comments" ON task_comments;
+DROP POLICY IF EXISTS "Users can delete own comments" ON task_comments;
+
 -- Create new non-recursive policies using the helper functions
 
 -- Projects policies

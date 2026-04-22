@@ -100,11 +100,12 @@ CREATE TRIGGER refresh_after_project_creation
   AFTER INSERT ON projects
   FOR EACH ROW EXECUTE FUNCTION refresh_after_project_change();
 
--- Also refresh after project member changes (already exists but let's ensure it's there)
+-- vortex-kanba fork: removed a broken CREATE TRIGGER that tried to use
+-- refresh_user_accessible_projects() (returns void) as a trigger function.
+-- The next migration (20250621182708_precious_credit.sql) creates this trigger
+-- correctly using trigger_refresh_user_accessible_projects() which returns
+-- trigger type. Dropping the bad trigger definition here to let the fix land.
 DROP TRIGGER IF EXISTS refresh_after_member_change ON project_members;
-CREATE TRIGGER refresh_after_member_change
-  AFTER INSERT OR UPDATE OR DELETE ON project_members
-  FOR EACH ROW EXECUTE FUNCTION refresh_user_accessible_projects();
 
 -- Test that the policies work correctly
 DO $$

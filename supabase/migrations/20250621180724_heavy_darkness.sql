@@ -16,9 +16,9 @@
     - Ensure functions are secure and efficient
 */
 
--- Drop existing functions if they exist (cleanup)
-DROP FUNCTION IF EXISTS user_has_project_access(uuid, uuid);
-DROP FUNCTION IF EXISTS user_can_manage_project(uuid, uuid);
+-- vortex-kanba fork: removed DROP FUNCTION IF EXISTS statements — they fail on
+-- fresh DBs where earlier migrations already created policies that depend on
+-- these functions. CREATE OR REPLACE below handles redefinition safely.
 
 -- Create the user_has_project_access function
 CREATE OR REPLACE FUNCTION user_has_project_access(project_uuid uuid, user_uuid uuid)
